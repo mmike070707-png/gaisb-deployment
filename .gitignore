@@ -1,0 +1,12 @@
+game_bot/
+coin-master-bot/
+build/
+dist/
+__pycache__/
+*.pyc
+*.sh
+*.deb
+bot_action.py
+qrcode.png
+screen.png
+*.jpg
