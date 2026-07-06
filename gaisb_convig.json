@@ -1,0 +1,17 @@
+cat << 'EOF' > gaisb_config.json
+{
+  "standards_body": "Global AI Standards Body (GAISB)",
+  "framework_version": "2026.1",
+  "audit_domains": {
+    "D1_AI_Strategy_Economy": 0.10,
+    "D2_Foundations_of_Generative_AI": 0.12,
+    "D3_Prompt_Engineering_LLM_System_Design": 0.18,
+    "D4_AI_Agents_Agentic_Workflows": 0.18
+  },
+  "compliance_threshold": 0.80,
+  "logging": {
+    "enabled": true,
+    "output_file": "audit_registry.log"
+  }
+}
+EOF
