@@ -7,3 +7,4 @@ coin-master-bot/
 *.deb
 *.save
 vscode.deb
+node_modules/
