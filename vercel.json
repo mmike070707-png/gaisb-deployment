@@ -1,5 +1,9 @@
 {
-  "outputDirectory": null,
+  "functions": {
+    "api/index.py": {
+      "runtime": "vercel-python@0.2.0"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
