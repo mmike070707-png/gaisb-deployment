@@ -1,12 +1,8 @@
-game_bot/
-coin-master-bot/
+__pycache__/
 build/
 dist/
-__pycache__/
 *.pyc
-*.sh
+game_bot/
+coin-master-bot/
 *.deb
-bot_action.py
-qrcode.png
-screen.png
-*.jpg
+*.save
