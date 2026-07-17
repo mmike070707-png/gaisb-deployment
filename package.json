@@ -1,4 +1,4 @@
-HEAD
+
 {
   "name": "@workspace/db",
   "version": "0.0.0",
@@ -26,4 +26,4 @@ HEAD
 }
 
 {"name": "gaisb-ai", "version": "1.0.0", "scripts": {"build": "echo Build success", "start": "echo Server active"}}
- 0cea681 (Revert to correct Interviewer App codebase)
+ 0cea681
