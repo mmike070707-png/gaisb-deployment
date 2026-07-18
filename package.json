@@ -4,14 +4,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "typescript": "^5.0.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
     "zod": "^3.23.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
     "vercel": "^50.41.0"
   }
 }
