@@ -1,7 +1,12 @@
 {
+  "functions": {
+    "modules/main.py": {
+      "runtime": "vercel@3.12"
+    }
+  },
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "destination": "/modules/main.py"
     }
   ]
