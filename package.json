@@ -1,28 +1,16 @@
 {
-  "name": "gaisb-ai",
+  "name": "gaisb-deployment",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "exports": {
-    ".": "./src/index.ts",
-    "./schema": "./src/schema/index.ts"
-  },
   "scripts": {
-    "build": "echo Build success",
-    "start": "echo Server active",
-    "push": "drizzle-kit push --config ./drizzle.config.ts",
-    "push-force": "drizzle-kit push --force --config ./drizzle.config.ts"
-  },
+    "build": "tsc"
+ },
   "dependencies": {
-    "drizzle-orm": "catalog:",
-    "drizzle-zod": "^0.8.3",
-    "pg": "^8.22.0",
-    "zod": "catalog:"
+    "zod": "^3.23.0",
+    "typescript": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
-    "@types/pg": "^8.20.0",
-    "drizzle-kit": "^0.31.10"
+    "@types/node": "^20.0.0"
   }
 }
-
