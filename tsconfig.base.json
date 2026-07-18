@@ -22,5 +22,6 @@
     "target": "es2022",
     "types": [],
     "customConditions": ["workspace"]
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 }

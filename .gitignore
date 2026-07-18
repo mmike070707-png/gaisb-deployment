@@ -1,12 +1,22 @@
-__pycache__/
+# Dependency folders
+node_modules/
+
+# Build and distribution folders
 build/
 dist/
+
+# Python cache and compiled files
+__pycache__/
 *.pyc
+
+# Local environment variables
+.env
+
+# Project specific folders/files
 game_bot/
 coin-master-bot/
+
+# Installation/System files
 *.deb
 *.save
 vscode.deb
-node_modules/
-node_modules/
-node_modules/
