@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "type-check": "tsc --noEmit"
+    "build": "tsc && echo 'Build complete'",
+    "start": "node api/index.py"
   },
   "dependencies": {
     "typescript": "^5.0.0"
