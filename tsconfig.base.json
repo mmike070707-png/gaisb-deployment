@@ -1,27 +1,27 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "isolatedModules": true,
-    "lib": ["es2022"],
+    "target": "es2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": false,
-    "noImplicitReturns": true,
-    "noUnusedLocals": false,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": false,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true,
-    "alwaysStrict": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "types": [],
-    "customConditions": ["workspace"]
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
