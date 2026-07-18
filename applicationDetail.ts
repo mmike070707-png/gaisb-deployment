@@ -4,7 +4,7 @@
  * Screen4Hire - AI-powered recruitment platform for multi-corporation use
  * OpenAPI spec version: 0.1.0
  */
-import type { Job } from './job';
+import type { Job } from './jobs';
 
 export interface ApplicationDetail {
   id: number;

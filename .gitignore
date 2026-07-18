@@ -20,3 +20,5 @@ coin-master-bot/
 *.deb
 *.save
 vscode.deb
+.vercel
+.env*
