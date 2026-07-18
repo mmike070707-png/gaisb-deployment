@@ -1,4 +1,4 @@
 [tool.vercel]
-entrypoint = "4hireai.app.main:app"
+entrypoint = "backend.main:app"
 [tool.vercel]
-entrypoint = "4hireai.app.main:app"
+entrypoint = "backend.main:app"
