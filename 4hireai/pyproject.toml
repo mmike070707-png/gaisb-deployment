@@ -1,0 +1,4 @@
+[tool.vercel]
+entrypoint = "4hireai.app.main:app"
+[tool.vercel]
+entrypoint = "4hireai.app.main:app"
