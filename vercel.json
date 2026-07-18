@@ -1,7 +1,7 @@
 {
   "functions": {
     "modules/main.py": {
-      "runtime": "vercel@3.12"
+      "runtime": "vercel-python@3.12"
     }
   },
   "rewrites": [
