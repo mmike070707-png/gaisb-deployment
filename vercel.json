@@ -1,8 +1,13 @@
 {
-  "rewrites": [
+  "functions": {
+    "modules/main.py": {
+      "runtime": "vercel-python@3.12"
+    }
+  },
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/modules/main.py"
+      "src": "/(.*)",
+      "dest": "modules/main.py"
     }
   ]
 }
