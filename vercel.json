@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "modules/main.py": {
-      "runtime": "vercel-python@3.12"
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
