@@ -1,4 +1,3 @@
-cat << 'EOF' > gaisb_config.json
 {
   "standards_body": "Global AI Standards Body (GAISB)",
   "framework_version": "2026.1",
@@ -14,4 +13,3 @@ cat << 'EOF' > gaisb_config.json
     "output_file": "audit_registry.log"
   }
 }
-EOF
