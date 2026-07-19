@@ -1,4 +1,5 @@
 # GAISB Deployment
+
 ## About
 GAISB is a truth-focused conversational interface designed for efficient information retrieval and interaction.
 
