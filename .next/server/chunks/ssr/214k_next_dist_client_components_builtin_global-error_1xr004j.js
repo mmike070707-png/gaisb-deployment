@@ -1,3 +1,0 @@
-module.exports=[33758,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(72932);a.n(d("[project]/gaisb-deploy-final/my-next-app/gaisb/gaisb-deployment/temp-repo/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},71459,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(72932);a.n(d("[project]/gaisb-deploy-final/my-next-app/gaisb/gaisb-deployment/temp-repo/node_modules/next/dist/client/components/builtin/global-error.js"))},34519,a=>{"use strict";a.i(33758);var b=a.i(71459);a.n(b)},15252,a=>{a.n(a.i(34519))}];
-
-//# sourceMappingURL=214k_next_dist_client_components_builtin_global-error_1xr004j.js.map

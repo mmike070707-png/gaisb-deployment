@@ -1,1 +1,16 @@
-{"projectId":"prj_2qSDhGCZrOJAhyWIwJmkKblmoaza","orgId":"team_rugV2gC5spHp33OHhH3AzQ5Q","projectName":"gaisb-final-production"}
+{
+  "projectId": "prj_2qSDhGCZrOJAhyWIwJmkKblmoaza",
+  "orgId": "team_rugV2gC5spHp33OHhH3AzQ5Q",
+  "projectName": "gaisb-final-production",
+  "settings": {
+    "createdAt": 1784434318661,
+    "framework": "nextjs",
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}

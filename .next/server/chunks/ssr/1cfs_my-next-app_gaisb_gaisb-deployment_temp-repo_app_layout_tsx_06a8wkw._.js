@@ -1,3 +1,0 @@
-module.exports=[41005,a=>{"use strict";var b=a.i(14736);a.s(["default",0,function({children:a}){return(0,b.jsx)("html",{lang:"en",children:(0,b.jsxs)("body",{children:[(0,b.jsx)("main",{children:a}),(0,b.jsxs)("footer",{children:[(0,b.jsx)("a",{href:"/terms",children:"Terms of Service"})," | ",(0,b.jsx)("a",{href:"/privacy",children:"Privacy Policy"})]})]})})},"metadata",0,{title:"GAISB",description:"Automated staffing platform"}])},34122,a=>{a.n(a.i(41005))}];
-
-//# sourceMappingURL=1cfs_my-next-app_gaisb_gaisb-deployment_temp-repo_app_layout_tsx_06a8wkw._.js.map
