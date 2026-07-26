@@ -126,12 +126,11 @@ export default function App() {
     if (interviewStep < 2) {
       setInterviewStep(interviewStep + 1);
     } else {
-      // Complete interview simulation
       setInterviewActive(false);
       setInterviewReport({
         score: 96,
         summary: 'Exceptional communication and high technical alignment with employer benchmarks.',
-        videoRecorded: 'recording_session_gaisb_9841.mp4',
+        videoRecorded: 'recording_session_careergen_9841.mp4',
         timestamp: new Date().toLocaleString()
       });
     }
@@ -143,7 +142,7 @@ export default function App() {
       <header className="bg-slate-950 border-b border-slate-800 p-4 flex justify-between items-center px-8 shadow-md">
         <div className="text-xl font-bold tracking-wider text-blue-400 cursor-pointer flex items-center gap-3" onClick={() => setCurrentView('home')}>
           {profilePic && <img src={profilePic} alt="Profile" className="w-8 h-8 rounded-full object-cover border border-blue-500" />}
-          GAISB<span className="text-white">.pro</span>
+          Career<span className="text-white">Generation</span>
         </div>
         <div className="flex gap-3 flex-wrap items-center">
           <button onClick={() => setCurrentView('home')} className={`px-3 py-2 rounded-lg text-sm font-medium transition ${currentView === 'home' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 text-slate-300'}`}>
@@ -190,7 +189,7 @@ export default function App() {
         {currentView === 'home' && (
           <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
             <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
-              Global AI Staffing & Benchmarking
+              CareerGeneration
             </h1>
             <p className="text-xl text-slate-400 max-w-2xl mb-8">
               The premier automated forensic-grade candidate screening, job board, and AI resume builder engine.
@@ -216,7 +215,7 @@ export default function App() {
         {currentView === 'login' && (
           <div className="flex-1 flex flex-col items-center justify-center p-8">
             <div className="bg-slate-950 border border-slate-800 p-8 rounded-2xl max-w-md w-full shadow-2xl">
-              <h2 className="text-2xl font-bold text-white mb-2 text-center">GAISB Secure Login</h2>
+              <h2 className="text-2xl font-bold text-white mb-2 text-center">CareerGeneration Secure Login</h2>
               <p className="text-slate-400 text-sm text-center mb-6">Choose your portal to access specialized dashboards.</p>
               
               <div className="flex flex-col gap-4">
@@ -492,7 +491,7 @@ export default function App() {
                   <div>
                     <h4 className="font-bold text-white">Alex Morgan - Senior React Developer Applicant</h4>
                     <p className="text-xs text-blue-400 mt-0.5">AI Forensic Score: 96/100 • Status: Interview Completed</p>
-                    <p className="text-xs text-slate-400 mt-1">Video Recording: <span className="text-emerald-400 underline cursor-pointer">recording_session_gaisb_9841.mp4</span></p>
+                    <p className="text-xs text-slate-400 mt-1">Video Recording: <span className="text-emerald-400 underline cursor-pointer">recording_session_careergen_9841.mp4</span></p>
                   </div>
                   <button onClick={() => alert('Downloading full report and video copy for review...')} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold rounded-xl border border-slate-700 transition">
                     Review Report & Video
