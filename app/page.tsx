@@ -1,31 +1,22 @@
-import React from 'react';
-
-export default function HomePage() {
+export default function Home() {
   return (
-    <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto' }}>
-      <header style={{ marginBottom: '3rem' }}>
-        <h1 style={{ fontSize: '2.5rem', color: '#1a1a1a' }}>GAISB</h1>
-        <p style={{ fontSize: '1.2rem', color: '#4a4a4a' }}>
-          Global AI Staffing & Benchmarking | Powered by Jason Styles
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-50">
+      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
+        <h1 className="text-4xl font-bold text-center mb-8 text-blue-900">
+          Global AI Staffing & Benchmarking (GAISB)
+        </h1>
+        <p className="text-xl text-center mb-12 text-gray-700">
+          Welcome to the future of hiring.
         </p>
-      </header>
-
-      <section style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '1.5rem' }}>The Future of Staffing</h2>
-        <p>
-          Meet <strong>Jason Styles</strong>, your dedicated professional go-getter. 
-          Whether you are a job seeker looking for your next role or an employer 
-          posting openings, Jason handles the heavy lifting.
-        </p>
-        <p>
-          We bridge the gap in the busiest top industries, ensuring you get the best 
-          teams through our truth-centered, AI-driven verification process.
-        </p>
-      </section>
-
-      <footer style={{ marginTop: '4rem', borderTop: '1px solid #ccc', paddingTop: '1rem' }}>
-        <small>© 2026 GAISB — Infrastructure for the Future of Work</small>
-      </footer>
+        <div className="flex justify-center gap-4">
+          <a href="/chat" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Meet Jason Styles (Interviewer)
+          </a>
+          <a href="/dashboard" className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition">
+            Employer Dashboard
+          </a>
+        </div>
+      </div>
     </main>
   );
 }

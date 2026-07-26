@@ -1,21 +1,22 @@
-export const metadata = {
-  title: 'GAISB',
-  description: 'Automated staffing platform',
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "GAISB | Global AI Staffing & Benchmarking",
+  description: "AI-powered staffing and benchmarking platform.",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
-        <footer>
-          <a href="/terms">Terms of Service</a> | <a href="/privacy">Privacy Policy</a>
-        </footer>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
