@@ -1,3 +1,5 @@
+import LoginWrapper from './components/LoginWrapper';
+import PaymentButton from './components/PaymentButton';
 import React, { useState } from 'react';
 
 export default function App() {
@@ -179,6 +181,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans relative">
+      <LoginWrapper onLoginSuccess={(role, email) => console.log('Logged in as:', role, email)} />
+      <div className="fixed bottom-4 right-4 z-50">
+        <PaymentButton />
+      </div>
+
       {/* Navigation Header */}
       <header className="bg-slate-950 border-b border-slate-800 p-4 flex justify-between items-center px-8 shadow-md">
         <div className="text-xl font-bold tracking-wider text-blue-400 cursor-pointer flex items-center gap-3" onClick={() => setCurrentView('home')}>
