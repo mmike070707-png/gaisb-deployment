@@ -10,7 +10,7 @@ export default function App() {
   const [userEmail, setUserEmail] = useState('alex.morgan@example.com');
   const [subscriptionActive, setSubscriptionActive] = useState(true);
 
-  // Employer Subscription Tier State ('free' | 'paid')
+  // employer Subscription Tier State ('free' | 'paid')
   const [employerTier, setEmployerTier] = useState('free'); // default to free
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [termsAgreed, setTermsAgreed] = useState(false);
@@ -23,21 +23,21 @@ export default function App() {
     skills: 'React, JavaScript, Tailwind CSS, Node.js, Git'
   });
 
-  // Jobs Feed & Employer Posting
+  // Jobs Feed & employer Posting
   const [jobs, setJobs] = useState([
     { id: 1, title: 'Senior React Developer', company: 'Apex Innovations', location: 'Remote', pay: '$140k - $170k', description: 'Looking for an experienced React engineer to lead our frontend architecture.' },
     { id: 2, title: 'AI Integration Specialist', company: 'Neural Systems', location: 'New York, NY', pay: '$150k - $190k', description: 'Develop intelligent agent integrations and automated screening pipelines.' }
   ]);
   const [appliedJobs, setAppliedJobs] = useState([]);
 
-  // Employer Settings & Criteria
-  const [employerSettings, setEmployerSettings] = useState({
+  // employer Settings & Criteria
+  const [employerSettings, setemployerSettings] = useState({
     topCandidateCount: 10,
     instructions: 'Evaluate candidates strictly on technical depth, React experience, and clean code principles.',
     questionnaire: '1. Describe a complex state management challenge you solved.\n2. How do you ensure high performance in large-scale React apps?\n3. What is your experience with Tailwind CSS?'
   });
 
-  // Employer Post Job Form State
+  // employer Post Job Form State
   const [newJobTitle, setNewJobTitle] = useState('');
   const [newJobPay, setNewJobPay] = useState('');
   const [newJobLoc, setNewJobLoc] = useState('');
@@ -81,7 +81,7 @@ export default function App() {
         alert(`You have already applied to ${job.title}.`);
       }
     } else {
-      alert('Employer accounts browse the public feed. Log in as an applicant to apply.');
+      alert('employer accounts browse the public feed. Log in as an applicant to apply.');
     }
   };
 
@@ -91,14 +91,14 @@ export default function App() {
 
     // Check tier limitations for free tier
     if (employerTier === 'free' && jobs.length >= 2) {
-      alert('Free Employer Tier is limited to a maximum of 2 active job postings at a time. Upgrade to Paid Tier for full access and unlimited postings!');
+      alert('Free employer Tier is limited to a maximum of 2 active job postings at a time. Upgrade to Paid Tier for full access and unlimited postings!');
       return;
     }
 
     const newJob = {
       id: jobs.length + 1,
       title: newJobTitle,
-      company: 'Apex Innovations (Employer)',
+      company: 'Apex Innovations (employer)',
       location: newJobLoc || 'Remote',
       pay: newJobPay || '$100k - $130k',
       description: newJobDesc
@@ -196,6 +196,7 @@ export default function App() {
           <button onClick={() => setCurrentView('home')} className={`px-3 py-2 rounded-lg text-sm font-medium transition ${currentView === 'home' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 text-slate-300'}`}>
             Home
           </button>
+          
           <button onClick={() => setCurrentView('jobs')} className={`px-3 py-2 rounded-lg text-sm font-medium transition ${currentView === 'jobs' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 text-slate-300'}`}>
             Jobs Feed {authRole ? '(Free)' : '(Login Required)'}
           </button>
@@ -217,7 +218,7 @@ export default function App() {
           {authRole === 'employer' && (
             <>
               <button onClick={() => setCurrentView('employer-dashboard')} className={`px-3 py-2 rounded-lg text-sm font-medium transition ${currentView === 'employer-dashboard' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 text-slate-300'}`}>
-                Employer Dashboard
+                employer Dashboard
               </button>
               <button onClick={() => setCurrentView('employer-pricing')} className={`px-3 py-2 rounded-lg text-sm font-medium transition ${currentView === 'employer-pricing' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 text-slate-300'}`}>
                 Pricing Tiers
@@ -251,7 +252,7 @@ export default function App() {
               CareerGeneration
             </h1>
             <p className="text-xl text-slate-400 max-w-2xl mb-8">
-              The premier automated forensic-grade candidate screening, job board, and AI resume builder engine. Free for applicants; flexible tiers for employers.
+              The premier automated forensic-grade candidate screening, job board, and AI resume builder engine. Free for applicants; flexible tiers for employerS.
             </p>
             <div className="flex gap-4 flex-wrap justify-center mb-6">
               <button onClick={() => setCurrentView('jobs')} className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg transition">
@@ -286,16 +287,14 @@ export default function App() {
                   className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg transition flex flex-col items-center"
                 >
                   <span>Applicant Portal (Free Job Feed & Resume)</span>
-                  <span className="text-xs text-blue-200 font-normal mt-0.5">Sign up / log in required to browse jobs</span>
-                </button>
+                  <span className="text-xs text-blue-200 font-normal mt-0.5">Sign up / log in required to browse jobs</span></button>
 
                 <button 
                   onClick={() => { setAuthRole('employer'); setCurrentView('employer-dashboard'); }}
                   className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl border border-slate-700 shadow-lg transition flex flex-col items-center"
                 >
-                  <span>Employer Portal (Free & Paid Tiers)</span>
-                  <span className="text-xs text-slate-400 font-normal mt-0.5">Manage jobs, tracking, survey pipelines & payments</span>
-                </button>
+                  <span>employer Portal (Free & Paid Tiers)</span>
+                  <span className="text-xs text-slate-400 font-normal mt-0.5">Manage jobs, tracking, survey pipelines & payments</span></button>
 
                 <button 
                   onClick={() => { setAuthRole('admin'); setCurrentView('admin-dashboard'); }}
@@ -343,7 +342,7 @@ export default function App() {
         {currentView === 'employer-pricing' && (
           <div className="flex-1 p-8 max-w-5xl mx-auto w-full">
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-white">Employer Subscription Tiers</h1>
+              <h1 className="text-3xl font-bold text-white">employer Subscription Tiers</h1>
               <p className="text-slate-400 text-sm mt-2">Choose the plan that fits your recruiting pipeline and tracking needs.</p>
             </div>
 
@@ -413,8 +412,7 @@ export default function App() {
                 <p className="text-slate-400 text-sm">Craft and refine your professional profile with Jason Styles integrated into your editing flow.</p>
               </div>
               <button onClick={() => setChatOpen(true)} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl transition flex items-center gap-2">
-                <span>💬 Consult Jason</span>
-              </button>
+                <span>💬 Consult Jason</span></button>
             </div>
             <div className="bg-slate-950 border border-slate-800 p-6 rounded-2xl flex flex-col gap-6">
               <div>
@@ -557,7 +555,7 @@ export default function App() {
         {currentView === 'employer-dashboard' && (
           <div className="flex-1 p-8 max-w-7xl mx-auto w-full">
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-2xl font-bold text-white">Employer Dashboard & Employee Tracking</h1>
+              <h1 className="text-2xl font-bold text-white">employer Dashboard & Employee Tracking</h1>
               <div className="flex items-center gap-3">
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${employerTier === 'paid' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-slate-800 text-slate-300 border-slate-700'}`}>
                   Tier: {employerTier === 'paid' ? 'Paid Tier ($199/mo or $2,199/yr)' : 'Free Tier (Max 2 Postings)'}
@@ -667,18 +665,18 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1">Preset Top Candidate Threshold (#)</label>
-                  <input type="number" value={employerSettings.topCandidateCount} onChange={(e) => setEmployerSettings({...employerSettings, topCandidateCount: e.target.value})} className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" />
+                  <input type="number" value={employerSettings.topCandidateCount} onChange={(e) => setemployerSettings({...employerSettings, topCandidateCount: e.target.value})} className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1">Evaluation Instructions for Jason</label>
-                  <input type="text" value={employerSettings.instructions} onChange={(e) => setEmployerSettings({...employerSettings, instructions: e.target.value})} className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" />
+                  <input type="text" value={employerSettings.instructions} onChange={(e) => setemployerSettings({...employerSettings, instructions: e.target.value})} className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500" />
                 </div>
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-slate-300 mb-1">15-Point Questionnaire (Emailed automatically to applicants passing screen)</label>
-                <textarea value={employerSettings.questionnaire} onChange={(e) => setEmployerSettings({...employerSettings, questionnaire: e.target.value})} rows={4} className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-white focus:outline-none focus:border-blue-500" />
+                <textarea value={employerSettings.questionnaire} onChange={(e) => setemployerSettings({...employerSettings, questionnaire: e.target.value})} rows={4} className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-white focus:outline-none focus:border-blue-500" />
               </div>
-              <button onClick={() => alert('Employer screening criteria saved successfully!')} className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition">
+              <button onClick={() => alert('employer screening criteria saved successfully!')} className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition">
                 Save Criteria Settings
               </button>
             </div>
@@ -697,7 +695,7 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
               <div className="bg-slate-950 border border-slate-800 p-6 rounded-2xl">
-                <p className="text-slate-400 text-sm">Total Employers</p>
+                <p className="text-slate-400 text-sm">Total employerS</p>
                 <p className="text-3xl font-extrabold text-white mt-1">342</p>
               </div>
               <div className="bg-slate-950 border border-slate-800 p-6 rounded-2xl">
@@ -746,7 +744,7 @@ export default function App() {
               <p className="text-slate-400 text-sm mb-4">Read-only audit of automated employee tracking and survey response results across client companies.</p>
               <div className="bg-slate-900 border border-slate-800 p-4 rounded-xl text-xs text-slate-300 font-mono space-y-2">
                 <p>[2026-07-26 07:44] SURVEY_PIPE: Telemetry sync completed for 312 active hired personnel.</p>
-                <p>[2026-07-26 07:30] PAYMENT_GATEWAY: Recurring charge processed successfully for Employer ID #9821 ($199.00).</p>
+                <p>[2026-07-26 07:30] PAYMENT_GATEWAY: Recurring charge processed successfully for employer ID #9821 ($199.00).</p>
                 <p>[2026-07-26 07:15] COMPLIANCE: Terms of Service agreement verified for Paid Tier subscription upgrade.</p>
               </div>
             </div>
@@ -767,8 +765,7 @@ export default function App() {
             <div className="text-left">
               <p className="text-xs font-bold leading-tight">Jason Styles</p>
               <p className="text-[10px] text-blue-200 leading-tight">AI Recruiter & Screener</p>
-            </div>
-          </button>
+            </div></button>
         ) : (
           <div className="bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl w-96 h-[500px] flex flex-col overflow-hidden">
             <div className="bg-slate-900 p-4 border-b border-slate-800 flex justify-between items-center">
@@ -809,16 +806,15 @@ export default function App() {
             <div className="flex justify-between items-center mb-4 pb-4 border-b border-slate-800">
               <div>
                 <h2 className="text-xl font-bold text-white">Terms of Service & Payment Agreement</h2>
-                <p className="text-xs text-blue-400">Selected Plan: {selectedPlanType === 'monthly' ? '$199 / month' : '$2,199 / annually (Saving $189)'}</p>
+                <p className="text-xs text-blue-400">Selected Plan: {selectedPlanType === 'monthly' ? '99 / month' : ',199 / annually (Saving 89)'}</p>
               </div>
               <button onClick={() => setShowTermsModal(false)} className="text-slate-400 hover:text-white text-lg font-bold">✕</button>
             </div>
 
-            {/* Scrollable Detailed Terms Content */}
             <div className="flex-1 overflow-y-auto pr-2 space-y-4 text-xs text-slate-300 bg-slate-950 border border-slate-800 p-4 rounded-xl mb-6">
               <h4 className="font-bold text-white text-sm">CAREERGENERATION MASTER SUBSCRIPTION & TRACKING AGREEMENT</h4>
               <p>
-                <strong>1. Payment Terms & Billing Formats:</strong> By clicking "I Agree & Subscribe" below, you authorize CareerGeneration to immediately charge your designated payment method for the selected subscription tier: either $199.00 USD billed on a recurring monthly basis, or $2,199.00 USD billed annually (reflecting a $189.00 savings compared to monthly billing). Subscriptions renew automatically unless cancelled prior to the renewal date through your employer settings portal. All fees are non-refundable.
+                <strong>1. Payment Terms & Billing Formats:</strong> By clicking "I Agree & Subscribe" below, you authorize CareerGeneration to immediately charge your designated payment method for the selected subscription tier: either 99.00 USD billed on a recurring monthly basis, or ,199.00 USD billed annually (reflecting a 89.00 savings compared to monthly billing). Subscriptions renew automatically unless cancelled prior to the renewal date through your employer settings portal. All fees are non-refundable.
               </p>
               <p>
                 <strong>2. Employee Tracking & Telemetry Mandate:</strong> As an employer utilizing the Paid Tier of CareerGeneration, you explicitly acknowledge, agree, and consent that all candidates hired through the platform, as well as their ongoing workplace performance metrics, task progression, and milestone completions, shall be systematically tracked via our proprietary telemetry engine.
@@ -855,18 +851,20 @@ export default function App() {
                 Cancel
               </button>
               <button 
-                onClick={confirmPaidPlanSubscription} 
-                disabled={!termsAgreed}
-                className={`px-6 py-2.5 text-white text-xs font-semibold rounded-xl transition shadow ${termsAgreed ? 'bg-blue-600 hover:bg-blue-500 cursor-pointer' : 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700'}`}
+                onClick={() => {
+                  setShowTermsModal(false);
+                }}
+                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-semibold rounded-xl transition"
               >
-                I Agree & Subscribe ({selectedPlanType === 'monthly' ? '$199/mo' : '$2,199/yr'})
+                I Agree & Subscribe ({selectedPlanType === 'monthly' ? '99/mo' : ',199/yr'})
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* AI Video Interview Modal Simulation */}
+       {/* AI Video Interview Modal Simulation */}
+    
       {interviewActive && (
         <div className="fixed inset-0 bg-slate-950/90 z-50 flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-8 flex flex-col shadow-2xl relative">
