@@ -3,7 +3,9 @@ import PaymentButton from './components/PaymentButton';
 import React, { useState } from 'react';
 
 export default function App() {
-  const [authRole, setAuthRole] = useState(null); // 'applicant' | 'employer' | 'admin' | null
+  const [authRole, setAuthRole] = useState(null);
+    const [showTutorial, setShowTutorial] = useState(false);
+    const [tutorialRole, setTutorialRole] = useState(null); // 'applicant' | 'employer' | 'admin' | null
   const [currentView, setCurrentView] = useState('home');
   const [profilePic, setProfilePic] = useState(null);
   const [userName, setUserName] = useState('Alex Morgan');
@@ -276,38 +278,55 @@ export default function App() {
         )}
 
         {currentView === 'login' && (
-          <div className="flex-1 flex flex-col items-center justify-center p-8">
-            <div className="bg-slate-950 border border-slate-800 p-8 rounded-2xl max-w-md w-full shadow-2xl">
-              <h2 className="text-2xl font-bold text-white mb-2 text-center">CareerGeneration Portal Access</h2>
-              <p className="text-slate-400 text-sm text-center mb-6">Sign up or log in to access the job feed, AI tools, and employer tiers.</p>
-              
-              <div className="flex flex-col gap-4">
-                <button 
-                  onClick={() => { setAuthRole('applicant'); setCurrentView('applicant-dashboard'); }}
-                  className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg transition flex flex-col items-center"
-                >
-                  <span>Applicant Portal (Free Job Feed & Resume)</span>
-                  <span className="text-xs text-blue-200 font-normal mt-0.5">Sign up / log in required to browse jobs</span></button>
+      <div className="flex-1 flex flex-col items-center justify-center p-8">
+        <div className="bg-slate-950 border border-slate-800 p-8 rounded-2xl max-w-md w-full shadow-2xl">
+          <h2 className="text-2xl font-bold text-white mb-2 text-center">CareerGeneration Portal Access</h2>
+          <p className="text-slate-400 text-sm text-center mb-6">Select your portal below to access your dashboard.</p>
+          
+          <div className="flex flex-col gap-4">
+            <button 
+              onClick={() => { 
+                setAuthRole('applicant'); 
+                setCurrentView('applicant-dashboard'); 
+                setTutorialRole('applicant');
+                setShowTutorial(true);
+              }}
+              className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg transition flex flex-col items-center px-4"
+            >
+              <span className="font-bold text-base">Applicant Portal</span>
+              <span className="text-xs text-blue-200 font-normal mt-1">Access Job Feed, Resume & Interview AI</span>
+            </button>
 
-                <button 
-                  onClick={() => { setAuthRole('employer'); setCurrentView('employer-dashboard'); }}
-                  className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl border border-slate-700 shadow-lg transition flex flex-col items-center"
-                >
-                  <span>employer Portal (Free & Paid Tiers)</span>
-                  <span className="text-xs text-slate-400 font-normal mt-0.5">Manage jobs, tracking, survey pipelines & payments</span></button>
+            <button 
+              onClick={() => { 
+                setAuthRole('employer'); 
+                setCurrentView('employer-dashboard'); 
+                setTutorialRole('employer');
+                setShowTutorial(true);
+              }}
+              className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl border border-slate-700 shadow-lg transition flex flex-col items-center px-4"
+            >
+              <span className="font-bold text-base">Employer Portal</span>
+              <span className="text-xs text-slate-300 font-normal mt-1">Manage Jobs, Tracking & Pipelines</span>
+            </button>
 
-                <button 
-                  onClick={() => { setAuthRole('admin'); setCurrentView('admin-dashboard'); }}
-                  className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium rounded-xl border border-slate-700 text-xs transition"
-                >
-                  Admin Analytics Access (Read-Only)
-                </button>
-              </div>
-            </div>
+            <button 
+              onClick={() => { 
+                setAuthRole('admin'); 
+                setCurrentView('admin-dashboard'); 
+                setTutorialRole('admin');
+                setShowTutorial(true);
+              }}
+              className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium rounded-xl border border-slate-700 text-xs transition"
+            >
+              Admin Analytics Access (Read-Only)
+            </button>
           </div>
-        )}
+        </div>
+      </div>
+    )}
 
-        {currentView === 'jobs' && (
+    {currentView === 'jobs' && (
           <div className="flex-1 p-8 max-w-6xl mx-auto w-full">
             <div className="flex justify-between items-center mb-6">
               <div>
@@ -927,6 +946,55 @@ export default function App() {
           </div>
         </div>
       )}
-    </div>
+    
+      {/* Jason Styles Dashboard-Specific Introduction Tutorial Modal */}
+      {showTutorial && currentView !== 'login' && (
+        <div className="fixed inset-0 bg-slate-950/90 z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-8 flex flex-col shadow-2xl relative">
+            <div className="flex items-center gap-4 mb-6 pb-4 border-b border-slate-800">
+              <div className="w-12 h-12 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-xl">
+                JS
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Jason Styles • AI Technical Recruiter</h3>
+                <p className="text-xs text-blue-400">Welcome to your CareerGeneration Session</p>
+              </div>
+            </div>
+
+            <div className="space-y-4 text-sm text-slate-300 bg-slate-950 border border-slate-800 p-5 rounded-2xl mb-6">
+              {tutorialRole === applicant && (
+                <>
+                  <p className="font-medium text-white">Hello! I am Jason Styles, your Senior AI Technical Recruiter.</p>
+                  <p>As an <strong>Applicant</strong>, I am here to help you optimize your resume, run forensic scoring against live employer criteria, and prepare you for automated video interviews.</p>
+                  <p className="text-xs text-slate-400">👉 Explore the Live Job Feed to apply instantly with a single click, or chat with me anytime in the bottom right corner for real-time resume refinement!</p>
+                </>
+              )}
+              {tutorialRole === employer && (
+                <>
+                  <p className="font-medium text-white">Welcome back! I am Jason Styles, your AI Recruitment Operations Partner.</p>
+                  <p>As an <strong>Employer</strong>, your dashboard empowers you to post open positions, manage candidate telemetry tracking, review 15-point evaluation surveys, and configure automated interview pipelines.</p>
+                  <p className="text-xs text-slate-400">👉 Check out your employer settings to set evaluation criteria or upgrade to the Paid Tier for full Indeed auto-sync and advanced employee analytics.</p>
+                </>
+              )}
+              {tutorialRole === admin && (
+                <>
+                  <p className="font-medium text-white">System Analytics Initialized.</p>
+                  <p>You are viewing the <strong>Admin Read-Only Analytics</strong> suite, monitoring platform-wide telemetry, subscription tiers, and engagement pipelines.</p>
+                </>
+              )}
+            </div>
+
+            <div className="flex justify-end">
+              <button 
+                onClick={() => setShowTutorial(false)}
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-xs shadow transition"
+              >
+                Let's Get Started &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+</div>
   );
 }
