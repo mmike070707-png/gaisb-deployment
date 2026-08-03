@@ -1,53 +1,131 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import LoginWrapper from './components/LoginWrapper';
 
-function App() {
+const demoJobs = [
+  { id: 1, title: 'Senior React Developer', company: 'Apex Innovations', location: 'Remote', pay: '$140k - $170k' },
+  { id: 2, title: 'AI Integration Specialist', company: 'Neural Systems', location: 'NY, NY', pay: '$150k - $190k' }
+];
+
+function ApplicantDashboard({ email, onLogout }) {
   return (
-    <div>
-      <header className="header">
-        <div className="nav-container">
-          <a href="/" className="logo">GAISB</a>
-          <nav className="nav-links">
-            <a href="#features">Features</a>
-            <a href="#contact">Contact</a>
-          </nav>
+    <div className="container p-8">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Applicant Job Reel</h1>
+        <div>
+          <span className="mr-4 text-sm text-gray-600">{email}</span>
+          <button onClick={onLogout} className="px-4 py-2 bg-red-500 text-white rounded">Logout</button>
         </div>
-      </header>
+      </div>
 
-      <section className="hero">
-        <div className="container">
-          <h1>Global AI Skills-Based Interviewing Platform</h1>
-          <p>Transform how you hire and get hired with AI-powered skill assessments</p>
-          <button className="btn" onClick={() => alert('Welcome to GAISB!')}>
-            Get Started
-          </button>
-        </div>
-      </section>
-
-      <section className="container" id="features">
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Why Choose GAISB?</h2>
-        <div className="grid">
-          <div className="card"><h3>🎯 Skill-Based Matching</h3><p>AI-powered assessment</p></div>
-          <div className="card"><h3>⚡ Fast & Efficient</h3><p>Complete in minutes</p></div>
-          <div className="card"><h3>🌍 Global Reach</h3><p>Connect worldwide</p></div>
-          <div className="card"><h3>📊 Data-Driven</h3><p>Real-time insights</p></div>
-          <div className="card"><h3>🔒 Professional</h3><p>Enterprise security</p></div>
-          <div className="card"><h3>🤖 AI-Powered</h3><p>AI assistant</p></div>
-        </div>
-      </section>
-
-      <section style={{ background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)', color: 'white', padding: '3rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h2>Ready to Transform Your Hiring?</h2>
-          <button className="btn" style={{ background: 'white', color: '#1e40af' }}>Start Free Trial</button>
-        </div>
-      </section>
-
-      <footer>
-        <p>&copy; 2024 GAISB</p>
-      </footer>
+      <div className="grid gap-4">
+        {demoJobs.map(job => (
+          <div key={job.id} className="p-4 border rounded">
+            <h3 className="text-xl font-semibold">{job.title}</h3>
+            <p className="text-sm text-gray-600">{job.company} • {job.location}</p>
+            <div className="mt-3 flex items-center justify-between">
+              <span className="text-green-600 font-semibold">{job.pay}</span>
+              <button className="px-3 py-1 bg-blue-600 text-white rounded">Apply</button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
-export default App;
+function EmployerDashboard({ email, onLogout }) {
+  return (
+    <div className="container p-8">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Employer Dashboard</h1>
+        <div>
+          <span className="mr-4 text-sm text-gray-600">{email}</span>
+          <button onClick={onLogout} className="px-4 py-2 bg-red-500 text-white rounded">Logout</button>
+        </div>
+      </div>
+      <div>
+        <p className="text-gray-700">Post jobs, view applicants, and manage pipelines (demo).</p>
+      </div>
+    </div>
+  );
+}
+
+function Home({ onOpenLogin }) {
+  return (
+    <div className="container p-8">
+      <h1 className="text-4xl font-bold mb-4">GAISB</h1>
+      <p className="mb-6">Global AI Skills-Based Interviewing Platform</p>
+      <button onClick={onOpenLogin} className="px-6 py-3 bg-blue-600 text-white rounded">Login / Sign Up</button>
+    </div>
+  );
+}
+
+export default function App() {
+  const [authRole, setAuthRole] = useState(null); // 'applicant' | 'employer' | 'admin' | null
+  const [authEmail, setAuthEmail] = useState(null);
+  const [authToken, setAuthToken] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    // load token if previously saved
+    const token = localStorage.getItem('authToken');
+    const role = localStorage.getItem('authRole');
+    const email = localStorage.getItem('authEmail');
+    if (token && role) {
+      setAuthToken(token);
+      setAuthRole(role);
+      setAuthEmail(email);
+    }
+  }, []);
+
+  const handleLoginSuccess = (role, email, token) => {
+    setAuthRole(role);
+    setAuthEmail(email);
+    setAuthToken(token);
+    if (token) localStorage.setItem('authToken', token);
+    if (role) localStorage.setItem('authRole', role);
+    if (email) localStorage.setItem('authEmail', email);
+    setShowLogin(false);
+  };
+
+  const handleLogout = () => {
+    setAuthRole(null);
+    setAuthEmail(null);
+    setAuthToken(null);
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('authRole');
+    localStorage.removeItem('authEmail');
+  };
+
+  return (
+    <div>
+      <header className="header p-4 border-b">
+        <div className="container flex justify-between">
+          <a href="/" className="logo font-bold">GAISB</a>
+          <div>
+            {authRole ? (
+              <button onClick={handleLogout} className="px-3 py-1 bg-red-500 text-white rounded">Logout</button>
+            ) : (
+              <button onClick={() => setShowLogin(true)} className="px-3 py-1 bg-blue-600 text-white rounded">Login</button>
+            )}
+          </div>
+        </div>
+      </header>
+
+      <main>
+        {!authRole && <Home onOpenLogin={() => setShowLogin(true)} />}
+        {authRole === 'applicant' && <ApplicantDashboard email={authEmail} onLogout={handleLogout} />}
+        {authRole === 'employer' && <EmployerDashboard email={authEmail} onLogout={handleLogout} />}
+        {authRole === 'admin' && (
+          <div className="container p-8">
+            <h1>Admin Dashboard (demo)</h1>
+            <button onClick={handleLogout} className="px-3 py-1 bg-red-500 text-white rounded mt-4">Logout</button>
+          </div>
+        )}
+      </main>
+
+      {showLogin && <LoginWrapper onLoginSuccess={handleLoginSuccess} onSwitchToSignUp={() => { alert('Sign up flow (not implemented)'); }} />}
+    </div>
+  );
+}

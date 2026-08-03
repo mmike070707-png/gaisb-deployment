@@ -5,7 +5,8 @@ import { auth } from '../firebase';
 export default function LoginWrapper({ onLoginSuccess, onSwitchToSignUp }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('candidate');
+  // use 'applicant' instead of 'candidate'
+  const [userType, setUserType] = useState('applicant');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -14,26 +15,20 @@ export default function LoginWrapper({ onLoginSuccess, onSwitchToSignUp }) {
     setError('');
     setLoading(true);
 
-    if (email === 'mcneermichael752@gmail.com' && password === 'Ford5150') {
-      setLoading(false);
-      onLoginSuccess('admin', email);
-      return;
-    }
-
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken(true);
       setLoading(false);
-      onLoginSuccess(userType, userCredential.user.email);
+      onLoginSuccess && onLoginSuccess(userType, userCredential.user.email, token);
     } catch (err) {
       setLoading(false);
-      if (
-        err.code === 'auth/invalid-credential' ||
-        err.code === 'auth/user-not-found' ||
-        err.code === 'auth/wrong-password'
-      ) {
+      const code = err?.code || '';
+      if (code === 'auth/invalid-email' || code === 'auth/user-not-found' || code === 'auth/wrong-password') {
         setError('Invalid email or password.');
-      } else if (err.code === 'auth/too-many-requests') {
+      } else if (code === 'auth/too-many-requests') {
         setError('Too many failed attempts. Please try again later.');
+      } else if (code === 'auth/network-request-failed') {
+        setError('Network error — please try again.');
       } else {
         setError(err.message || 'Failed to log in.');
       }
@@ -43,22 +38,20 @@ export default function LoginWrapper({ onLoginSuccess, onSwitchToSignUp }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white p-8 rounded-lg shadow-xl w-96 max-w-full">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          TalentNetwork Access
-        </h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">TalentNetwork Access</h2>
 
         <div className="flex justify-center space-x-2 mb-4">
           <button
             type="button"
-            className={'px-3 py-1 rounded text-sm ' + (userType === 'candidate' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700')}
-            onClick={() => setUserType('candidate')}
+            className={'px-3 py-1 rounded text-sm ' + (userType === 'applicant' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700')}
+            onClick={() => setUserType('applicant')}
           >
-            Candidate
+            Applicant
           </button>
           <button
             type="button"
-            className={'px-3 py-1 rounded text-sm ' + (userType === 'Employer' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700')}
-            onClick={() => setUserType('Employer')}
+            className={'px-3 py-1 rounded text-sm ' + (userType === 'employer' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700')}
+            onClick={() => setUserType('employer')}
           >
             Employer
           </button>
