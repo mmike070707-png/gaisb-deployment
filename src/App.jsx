@@ -1,52 +1,44 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Login from './pages/Login';
+import CandidateDashboard from './pages/CandidateDashboard';
+import EmployerDashboard from './pages/EmployerDashboard';
+import Home from './pages/Home';
+
+function ProtectedRoute({ children, requiredType }) {
+  const { user, userType, loading } = useAuth();
+
+  if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
+
+  if (!user) return <Navigate to="/login" />;
+
+  if (requiredType && userType !== requiredType) return <Navigate to="/" />;
+
+  return children;
+}
+
+function AppRoutes() {
+  const { user, userType } = useAuth();
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={user ? <Navigate to={userType === 'candidate' ? '/candidate' : '/employer'} /> : <Login />} />
+      <Route path="/candidate" element={<ProtectedRoute requiredType="candidate"><CandidateDashboard /></ProtectedRoute>} />
+      <Route path="/employer" element={<ProtectedRoute requiredType="employer"><EmployerDashboard /></ProtectedRoute>} />
+    </Routes>
+  );
+}
 
 function App() {
   return (
-    <div>
-      <header className="header">
-        <div className="nav-container">
-          <a href="/" className="logo">GAISB</a>
-          <nav className="nav-links">
-            <a href="#features">Features</a>
-            <a href="#contact">Contact</a>
-          </nav>
-        </div>
-      </header>
-
-      <section className="hero">
-        <div className="container">
-          <h1>Global AI Skills-Based Interviewing Platform</h1>
-          <p>Transform how you hire and get hired with AI-powered skill assessments</p>
-          <button className="btn" onClick={() => alert('Welcome to GAISB!')}>
-            Get Started
-          </button>
-        </div>
-      </section>
-
-      <section className="container" id="features">
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Why Choose GAISB?</h2>
-        <div className="grid">
-          <div className="card"><h3>🎯 Skill-Based Matching</h3><p>AI-powered assessment</p></div>
-          <div className="card"><h3>⚡ Fast & Efficient</h3><p>Complete in minutes</p></div>
-          <div className="card"><h3>🌍 Global Reach</h3><p>Connect worldwide</p></div>
-          <div className="card"><h3>📊 Data-Driven</h3><p>Real-time insights</p></div>
-          <div className="card"><h3>🔒 Professional</h3><p>Enterprise security</p></div>
-          <div className="card"><h3>🤖 AI-Powered</h3><p>AI assistant</p></div>
-        </div>
-      </section>
-
-      <section style={{ background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)', color: 'white', padding: '3rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h2>Ready to Transform Your Hiring?</h2>
-          <button className="btn" style={{ background: 'white', color: '#1e40af' }}>Start Free Trial</button>
-        </div>
-      </section>
-
-      <footer>
-        <p>&copy; 2024 GAISB</p>
-      </footer>
-    </div>
+    <AuthProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </AuthProvider>
   );
 }
 
