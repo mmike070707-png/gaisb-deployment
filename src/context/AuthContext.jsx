@@ -1,58 +1,60 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { supabase, signUp, signIn, signOut } from '../config/supabase';
+import React, { createContext, useState, useEffect } from 'react';
+import { auth } from '../config/firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userType, setUserType] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setUser(session.user);
-        const type = localStorage.getItem(`userType_${session.user.id}`);
-        setUserType(type);
-      }
-      setLoading(false);
-    };
-
-    getSession();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        setUser(session.user);
-        const type = localStorage.getItem(`userType_${session.user.id}`);
-        setUserType(type);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          setUserType(userDoc.data().userType);
+        }
       } else {
         setUser(null);
         setUserType(null);
       }
+      setLoading(false);
     });
-
-    return () => subscription?.unsubscribe();
+    return unsubscribe;
   }, []);
 
-  const register = async (email, password, type, fullName = '') => {
-    const { data, error } = await signUp(email, password);
-    if (error) throw error;
-    
-    localStorage.setItem(`userType_${data.user.id}`, type);
-    setUserType(type);
-    
-    return data.user;
+  const register = async (email, password, name, userType) => {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    await setDoc(doc(db, 'users', result.user.uid), {
+      uid: result.user.uid,
+      email,
+      name,
+      userType,
+      createdAt: new Date(),
+    });
+    setUser(result.user);
+    setUserType(userType);
+    return result.user;
   };
 
   const login = async (email, password) => {
-    const { data, error } = await signIn(email, password);
-    if (error) throw error;
-    return data.user;
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    setUser(result.user);
+    const userDoc = await getDoc(doc(db, 'users', result.user.uid));
+    if (userDoc.exists()) {
+      setUserType(userDoc.data().userType);
+    }
+    return result.user;
   };
 
   const logout = async () => {
-    await signOut();
+    await signOut(auth);
+    setUser(null);
     setUserType(null);
   };
 
@@ -61,10 +63,12 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within AuthProvider');
+  const context = React.useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
   return context;
 };
